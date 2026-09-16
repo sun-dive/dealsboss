@@ -2,7 +2,7 @@
 // Contact form for dealsboss.com. The mailbox is read from a one-line file OUTSIDE the document root,
 // so no address is in the repo: create $HOME/dealsboss-mailbox.txt in cPanel's File Manager.
 $TO   = trim((string)@file_get_contents(dirname(__DIR__) . '/dealsboss-mailbox.txt'));
-$FROM = 'contact@dealsboss.com';
+$FROM = 'contact@' . ($_SERVER['SERVER_NAME'] ?? 'dealsboss.com');   // sender only, built at run time so no address sits in the repo
 
 $sent = $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
