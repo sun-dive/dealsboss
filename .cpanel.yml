@@ -1,0 +1,10 @@
+---
+# cPanel Git Version Control deployment for dealsboss.com.
+# In cPanel -> Git Version Control: "Update from Remote" then "Deploy HEAD Commit".
+# DEPLOYPATH must equal the document root shown in cPanel -> Domains for dealsboss.com.
+# The test -d line makes a wrong path fail instead of copying files somewhere else.
+deployment:
+  tasks:
+    - export DEPLOYPATH="$HOME/dealsboss.com/"
+    - test -d "$DEPLOYPATH" || { echo "no such document root: $DEPLOYPATH"; exit 1; }
+    - /bin/cp index.html privacy.html contact.php pages.css "$DEPLOYPATH"
